@@ -7,12 +7,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import static org.junit.Assert.*;
 
 public class HomePageStepDefs {
     HomePage homePage = new HomePage();
-
 
     @Given("the user navigates to URL")
     public void the_user_navigates_to_URL() {
@@ -33,7 +31,7 @@ public class HomePageStepDefs {
 
 
     @Then("the user enters name")
-    public void the_user_enters_name(){
+    public void the_user_enters_name() {
         homePage.nameGenerator();
     }
 
@@ -72,12 +70,6 @@ public class HomePageStepDefs {
     @Then("the user verifies Calculation Form is visible")
     public void theUserVerifiesCalculationFormIsVisible() {
         assertTrue("Form is not visible", homePage.form.isDisplayed());
-    }
-
-
-    @Then("the user verifies that Now Click me button is appeared")
-    public void theUserVerifiesThatNowClickMeButtonIsAppeared() {
-        assertTrue(homePage.nowClickMe.isDisplayed());
     }
 
 
@@ -140,19 +132,58 @@ public class HomePageStepDefs {
         Driver.get().navigate().back();
     }
 
+
     @Then("the user verifies that the form page is not reopened")
     public void theUserVerifiesThatTheFormPageIsNotReopened() {
         assertTrue(homePage.resultForm.isDisplayed());
     }
+
 
     @When("the user clicks refresh button of window")
     public void theUserClicksRefreshButtonOfWindow() {
         Driver.get().navigate().refresh();
     }
 
+
     @Then("the user verifies that the home page is reopened")
     public void theUserVerifiesThatTheHomePageIsReopened() {
         assertTrue(homePage.clickMe.isDisplayed());
         assertFalse(homePage.form.isDisplayed());
+    }
+
+
+    @And("the user verifies Click me button is visible")
+    public void theUserVerifiesClickMeButtonIsVisible() {
+        assertTrue("Click me button is not visible", homePage.clickMe.isDisplayed());
+    }
+
+
+    @And("the user verifies seeds number field is visible")
+    public void theUserVerifiesSeedsNumberFieldIsVisible() {
+        assertTrue("Seeds number field is not visible", homePage.seedsCount.isDisplayed());
+    }
+
+
+    @And("the user verifies name field is visible")
+    public void theUserVerifiesNameFieldIsVisible() {
+        assertTrue("Name field is not visible", homePage.nameField.isDisplayed());
+    }
+
+
+    @And("the user verifies time field is visible")
+    public void theUserVerifiesTimeFieldIsVisible() {
+        assertTrue("Time field is not visible", homePage.timeField.isDisplayed());
+    }
+
+
+    @And("the user verifies tree type field is visible")
+    public void theUserVerifiesTreeTypeFieldIsVisible() {
+        assertTrue("Tree type field is not visible", homePage.treeTypeOptions.isDisplayed());
+    }
+
+
+    @And("the user verifies alternative calculation checkbox is visible")
+    public void theUserVerifiesAlternativeCalculationCheckboxIsVisible() {
+        assertTrue("Alternative checkbox is not visible", homePage.alternativeCheckBox.isDisplayed());
     }
 }

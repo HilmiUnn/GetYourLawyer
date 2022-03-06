@@ -156,6 +156,7 @@ public class HomePage {
     boolean flag = false;
     public void clickCheckBox() {
         alternativeCheckBox.click();
+        assertTrue("Alternative calculation is not selected!",alternativeCheckBox.isSelected());
         flag = alternativeCheckBox.isSelected();
     }
 

@@ -1,4 +1,4 @@
-@Negative
+@Negative @AllScenarios
 Feature: QA Engineer test page testing Negative scenarios
 
   Background:
@@ -6,7 +6,7 @@ Feature: QA Engineer test page testing Negative scenarios
     And the user clicks "Click me" button
     And the user clicks "Now click me" button
 
-  @TC10
+  @TC8
   Scenario: Verify that it does not accept negative values or 0 value
 
     When the user enters zero or negative values
@@ -17,7 +17,7 @@ Feature: QA Engineer test page testing Negative scenarios
     And the user clicks "Submit" button
     Then the user verifies it gives warning message to enter positive values
 
-  @TC11
+  @TC9
   Scenario Outline: Verify that if user enters "e" or "." it gives notification message
     When the user enters "<value>" as seed number
     And the user enters name
@@ -30,7 +30,7 @@ Feature: QA Engineer test page testing Negative scenarios
       | e     |
       | .     |
 
-  @TC12
+  @TC10
   Scenario Outline: Verify that name field don't accept number or symbol values
     And the user enters number of seeds by keyboard
     When the user enters "<not alphabetical values>"
@@ -45,7 +45,7 @@ Feature: QA Engineer test page testing Negative scenarios
       | $                       |
       | #                       |
 
-  @TC13
+  @TC11
   Scenario: Verify that user gets error message if time field is empty
     And the user enters number of seeds by keyboard
     And the user enters name
@@ -53,7 +53,7 @@ Feature: QA Engineer test page testing Negative scenarios
     When the user clicks "Submit" button
     Then the user verifies that it gives warning message to enter time field
 
-  @TC14
+  @TC12
   Scenario:  Verify that user gets error message if tree type field is empty
     And the user enters number of seeds by keyboard
     And the user enters name
