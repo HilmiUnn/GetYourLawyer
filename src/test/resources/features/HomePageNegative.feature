@@ -8,7 +8,6 @@ Feature: QA Engineer test page testing Negative scenarios
 
   @TC8
   Scenario: Verify that it does not accept negative values or 0 value
-
     When the user enters zero or negative values
     And the user enters name
     And the user selects any time to plant feeds

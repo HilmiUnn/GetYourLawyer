@@ -15,6 +15,7 @@ Feature: QA Engineer test page testing Positive scenarios
     And the user verifies time field is visible
     And the user verifies tree type field is visible
     And the user verifies alternative calculation checkbox is visible
+    And the user verifies submit button is visible
 
   @TC2
   Scenario: Verify that default calculation method calculates correct value
@@ -28,7 +29,7 @@ Feature: QA Engineer test page testing Positive scenarios
     Then the user verifies the result and name
 
   @TC3
-  Scenario:  Verify that alternative calculation method calculates correct value
+  Scenario: Verify that alternative calculation method calculates correct value
     And the user clicks "Click me" button
     And the user clicks "Now click me" button
     When the user enters number of seeds by keyboard

@@ -107,6 +107,8 @@ public class HomePage {
                 break;
             case "Submit":
                 submit.click();
+            default:
+                System.out.println("Please enter button name correctly!");
         }
     }
 
@@ -192,6 +194,7 @@ public class HomePage {
     public void validationMessage(){
         String validationMessage = seedsCount.getAttribute("validationMessage");
         String expectedValidationMessage="Please enter a number.";
+        String decimalValidationMessage="Please enter a valid value.";
         assertEquals(validationMessage,expectedValidationMessage);
     }
 

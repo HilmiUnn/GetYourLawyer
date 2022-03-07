@@ -186,4 +186,9 @@ public class HomePageStepDefs {
     public void theUserVerifiesAlternativeCalculationCheckboxIsVisible() {
         assertTrue("Alternative checkbox is not visible", homePage.alternativeCheckBox.isDisplayed());
     }
+
+    @And("the user verifies submit button is visible")
+    public void theUserVerifiesSubmitButtonIsVisible() {
+        assertTrue("Submit button is not visible",homePage.submit.isDisplayed());
+    }
 }
