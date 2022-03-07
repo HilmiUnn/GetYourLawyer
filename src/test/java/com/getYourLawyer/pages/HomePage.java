@@ -2,24 +2,29 @@ package com.getYourLawyer.pages;
 
 import com.getYourLawyer.utilities.Driver;
 import com.github.javafaker.Faker;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import java.util.Random;
+
 import static org.junit.Assert.*;
 
 /**
-    * This class includes all webElements and methods
-    */
+ * This class includes all webElements and methods
+ */
 
 public class HomePage {
 
     /**
      * Used to initialize webElements
      */
-    public HomePage() {PageFactory.initElements(Driver.get(), this);}
+    public HomePage() {
+        PageFactory.initElements(Driver.get(), this);
+    }
 
 
     @FindBy(id = "first")
@@ -63,10 +68,11 @@ public class HomePage {
      * This method generates random positive values to enter as seed amount.
      * It saves random value to verify on later steps
      */
-    int value = 0;
+    public int value = 0;
+
     public void seedGenerator() {
         Random r = new Random();
-        value = r.nextInt(10_000_000);
+        value = r.nextInt(Integer.MAX_VALUE);
         seedsCount.sendKeys(String.valueOf(value));
     }
 
@@ -75,7 +81,7 @@ public class HomePage {
      */
     public void negativeOrZeroSeedGenerator() {
         Random r = new Random();
-        value = r.nextInt(1 + 10_000_000) - 10_000_000;
+        value = r.nextInt(1 + (Integer.MAX_VALUE - 1)) - (Integer.MAX_VALUE - 1);
         seedsCount.sendKeys(String.valueOf(value));
     }
 
@@ -84,6 +90,7 @@ public class HomePage {
      * It saves random name value to verify on later steps
      */
     String name = null;
+
     public void nameGenerator() {
         Faker faker = new Faker();
         name = faker.name().firstName().replaceAll("[^A-Za-z]", "")
@@ -95,29 +102,31 @@ public class HomePage {
 
     /**
      * This method used for clicking "Click me","Now click me" and "Submit" buttons
+     *
      * @param button
      */
     public void clickMethod(String button) {
-        switch (button) {
-            case "Click me":
+        switch (button.toLowerCase()) {
+            case "click me":
                 clickMe.click();
                 break;
-            case "Now click me":
+            case "now click me":
                 nowClickMe.click();
                 break;
-            case "Submit":
+            case "submit":
                 submit.click();
+                break;
             default:
-                System.out.println("Please enter button name correctly!");
+                Assert.fail("Button name isn't in expected format!");
         }
     }
 
     /**
      * This method used for selecting any time by using arrows
      */
-    public void timeSelect(){
+    public void timeSelect() {
         timeField.sendKeys(Keys.SPACE);
-        timeField.sendKeys(Keys.ARROW_DOWN,Keys.ARROW_DOWN);
+        timeField.sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN);
         timeField.sendKeys(Keys.ARROW_RIGHT);
         timeField.sendKeys(Keys.ARROW_DOWN);
         timeField.sendKeys(Keys.ARROW_RIGHT);
@@ -129,6 +138,7 @@ public class HomePage {
      * and also this method used for getting this value as an int to use at verify steps
      */
     int typeValue = 0;
+
     public void treeType(String type) {
         Select select = new Select(treeTypeOptions);
 
@@ -146,7 +156,7 @@ public class HomePage {
                 typeValue = 3;
                 break;
             default:
-                System.out.println("Please enter One,Two or Three ");
+                Assert.fail("You should enter One,Two or Three!");
         }
     }
 
@@ -156,9 +166,10 @@ public class HomePage {
      * And ıt saves check/uncheck option as boolean to use at verify steps
      */
     boolean flag = false;
+
     public void clickCheckBox() {
         alternativeCheckBox.click();
-        assertTrue("Alternative calculation is not selected!",alternativeCheckBox.isSelected());
+        assertTrue("Alternative calculation is not selected!", alternativeCheckBox.isSelected());
         flag = alternativeCheckBox.isSelected();
     }
 
@@ -169,13 +180,15 @@ public class HomePage {
      */
     public void verifyResult() {
         String expectedResult;
+
         if (flag) {
-            expectedResult = Integer.toString(value / 5 * typeValue);
+            expectedResult = Integer.toString(value / 5 * typeValue); //not possible to assert double values
         } else {
-            expectedResult = Integer.toString(value / 10 * typeValue);
+            expectedResult = Integer.toString(value / 10 * typeValue); //not possible to assert double values
         }
         assertTrue(result.getText().contains(expectedResult));
     }
+
 
     /**
      * This method used for verifying username
@@ -191,11 +204,23 @@ public class HomePage {
      * This method is used to get and verify validation message,
      * (which only is got when the user uses "e" and "." values as seed numbers)
      */
-    public void validationMessage(){
+    public void validationMessage() {
+
         String validationMessage = seedsCount.getAttribute("validationMessage");
-        String expectedValidationMessage="Please enter a number.";
-        String decimalValidationMessage="Please enter a valid value.";
-        assertEquals(validationMessage,expectedValidationMessage);
+        String expectedValidationMessage = "Please enter a number.";
+        assertEquals("Validation messages are not matching", validationMessage, expectedValidationMessage);
+    }
+
+
+    /**
+     * This method is used to get and verify validation message for decimal values,
+     * (which only is got when the user uses decimal values as seed numbers)
+     */
+    public void decimalValidationMessage() {
+        String decimalValidationMessage = seedsCount.getAttribute("validationMessage");
+        String decimalExpectedValidationMessage = "Please enter a valid value. The two nearest valid values are";
+        assertTrue("Decimal value messages are not matching", decimalValidationMessage.contains(decimalExpectedValidationMessage));
+
     }
 
     /**
@@ -229,8 +254,10 @@ public class HomePage {
                 newValue = Integer.parseInt(seedsCount.getAttribute("value"));
                 assertEquals((value - newValue), count);
                 value = newValue;
+                break;
+
             default:
-                System.out.println("Please enter Up or Down");
+                Assert.fail("Arrow direction should be Up or Down");
         }
     }
 

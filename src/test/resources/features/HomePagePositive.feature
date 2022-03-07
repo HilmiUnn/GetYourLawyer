@@ -1,5 +1,6 @@
 @Positive @AllScenarios
 Feature: QA Engineer test page testing Positive scenarios
+
   Background:
     Given the user navigates to URL
 

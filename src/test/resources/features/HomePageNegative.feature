@@ -30,6 +30,20 @@ Feature: QA Engineer test page testing Negative scenarios
       | .     |
 
   @TC10
+  Scenario Outline: Verify that if user enters decimal values it gives notification message
+    When the user enters "<decimal value>" as seed number
+    And the user enters name
+    And the user selects any time to plant feeds
+    And the user selects "ONE" tree type
+    And the user clicks "Submit" button
+    Then the user gets decimal value validation message
+    Examples:
+      | decimal value |
+      | 115.7         |
+      | 0.96          |
+
+
+  @TC11
   Scenario Outline: Verify that name field don't accept number or symbol values
     And the user enters number of seeds by keyboard
     When the user enters "<not alphabetical values>"
@@ -44,7 +58,7 @@ Feature: QA Engineer test page testing Negative scenarios
       | $                       |
       | #                       |
 
-  @TC11
+  @TC12
   Scenario: Verify that user gets error message if time field is empty
     And the user enters number of seeds by keyboard
     And the user enters name
@@ -52,7 +66,7 @@ Feature: QA Engineer test page testing Negative scenarios
     When the user clicks "Submit" button
     Then the user verifies that it gives warning message to enter time field
 
-  @TC12
+  @TC13
   Scenario:  Verify that user gets error message if tree type field is empty
     And the user enters number of seeds by keyboard
     And the user enters name

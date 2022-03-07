@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import static org.junit.Assert.*;
 
 public class HomePageStepDefs {
@@ -95,6 +96,10 @@ public class HomePageStepDefs {
     public void theUserGetsValidationMessage() {
         homePage.validationMessage();
     }
+
+
+    @Then("the user gets decimal value validation message")
+    public void theUserGetsDecimalValueValidationMessage() { homePage.decimalValidationMessage();}
 
 
     @When("the user clicks {string} arrow {int} times")
@@ -187,8 +192,10 @@ public class HomePageStepDefs {
         assertTrue("Alternative checkbox is not visible", homePage.alternativeCheckBox.isDisplayed());
     }
 
+
     @And("the user verifies submit button is visible")
     public void theUserVerifiesSubmitButtonIsVisible() {
-        assertTrue("Submit button is not visible",homePage.submit.isDisplayed());
+        assertTrue("Submit button is not visible", homePage.submit.isDisplayed());
     }
+
 }
